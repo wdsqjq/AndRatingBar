@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AndRatingBar">
+        <attr name="starColor" format="color|reference" />
+
+        <attr name="subStarColor" format="color|reference" />
+
+        <attr name="bgColor" format="color|reference" />
+
+        <!-- drawable of star -->
+        <attr name="starDrawable" format="reference"/>
+
+        <!-- drawable of background -->
+        <attr name="bgDrawable" format="reference"/>
+    </declare-styleable>
+</resources>
