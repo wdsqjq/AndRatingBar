@@ -7,15 +7,15 @@ A RatingBar library for android, you can customize size ,color and image easily!
 
 **Customize Size**
 
-![Sample1](screenshot/capture1.gif)
+![Size Sample](screenshot/capture1.gif)
 
 **Customize Color & Image**
 
-![Sample2](screenshot/capture2.gif)
+![Style Sample](screenshot/capture2.gif)
 
 **In RecyclerView**
 
-![Sample3](screenshot/capture3.gif)
+![List Sample](screenshot/capture3.gif)
 
 Implementation
 ----

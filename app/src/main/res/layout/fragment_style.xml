@@ -1,99 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingTop="16dp"
-    android:paddingRight="16dp"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/customize_count"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="16dp"
+        android:paddingRight="16dp">
 
-    <per.wsj.library.AndRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:numStars="8"
-        android:rating="5"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/customize_rating_image"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/customize_count" />
 
-    <per.wsj.library.AndRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        app:starDrawable="@drawable/ic_rating_star_flower"
-        android:rating="2.5"/>
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:numStars="8"
+            android:rating="5" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/customize_rating_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/customize_rating_image" />
 
-    <per.wsj.library.AndRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        app:starColor="@color/blue"
-        app:starDrawable="@drawable/ic_rating_star_heart"
-        android:rating="2.5"/>
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:rating="2.5"
+            app:starDrawable="@drawable/ic_rating_star_flower" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/customize_secondary_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/customize_rating_color" />
 
-    <per.wsj.library.AndRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        app:subStarColor="@color/green"
-        app:starDrawable="@drawable/ic_rating_star_heart"
-        android:rating="2.5"/>
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:rating="2.5"
+            app:starColor="@color/blue"
+            app:starDrawable="@drawable/ic_rating_star_heart" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/customize_background_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/customize_secondary_color" />
 
-    <per.wsj.library.AndRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        app:bgColor="#FFCCCC"
-        app:starDrawable="@drawable/ic_rating_star_heart"
-        android:rating="2.5"/>
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:rating="2.5"
+            app:starDrawable="@drawable/ic_rating_star_heart"
+            app:subStarColor="@color/green" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/customize_background_image"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/customize_background_color" />
 
-    <per.wsj.library.AndRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        app:starDrawable="@mipmap/star_blue"
-        app:bgDrawable="@mipmap/star_gray"
-        android:rating="2.5"/>
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:rating="2.5"
+            app:bgColor="#FFCCCC"
+            app:starDrawable="@drawable/ic_rating_star_heart" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/keep_origin_color"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/customize_background_image" />
 
-    <per.wsj.library.AndRatingBar
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        app:starDrawable="@mipmap/rating"
-        app:bgDrawable="@mipmap/rating2"
-        app:keepOriginColor="true"
-        android:rating="2.5"/>
-</LinearLayout>
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:rating="2.5"
+            app:bgDrawable="@mipmap/star_gray"
+            app:starDrawable="@mipmap/star_blue" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/keep_origin_color" />
+
+        <per.wsj.library.AndRatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:rating="2.5"
+            app:bgDrawable="@mipmap/rating2"
+            app:keepOriginColor="true"
+            app:starDrawable="@mipmap/rating" />
+    </LinearLayout>
+
+</ScrollView>
