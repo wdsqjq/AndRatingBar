@@ -10,4 +10,5 @@
     <string name="customize_secondary_color">customize secondary color</string>
     <string name="customize_background_color">customize background color</string>
     <string name="customize_background_image">customize background image</string>
+    <string name="keep_origin_color">keep origin color</string>
 </resources>

@@ -79,7 +79,21 @@
     <per.wsj.library.AndRatingBar
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        app:starDrawable="@drawable/star_blue"
-        app:bgDrawable="@drawable/star_gray"
+        app:starDrawable="@mipmap/star_blue"
+        app:bgDrawable="@mipmap/star_gray"
+        android:rating="2.5"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/keep_origin_color"/>
+
+    <per.wsj.library.AndRatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        app:starDrawable="@mipmap/rating"
+        app:bgDrawable="@mipmap/rating2"
+        app:keepOriginColor="true"
         android:rating="2.5"/>
 </LinearLayout>

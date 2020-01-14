@@ -53,6 +53,11 @@ public class AndRatingBar extends RatingBar {
      */
     private int mBgDrawable;
 
+    /**
+     * if keep the origin color of star drawable
+     */
+    private boolean mKeepOriginColor;
+
     private StarDrawable mDrawable;
 
     /**
@@ -63,7 +68,7 @@ public class AndRatingBar extends RatingBar {
     private float mTempRating;
 
     public AndRatingBar(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public AndRatingBar(Context context, AttributeSet attrs) {
@@ -95,17 +100,19 @@ public class AndRatingBar extends RatingBar {
                     R.styleable.AndRatingBar_bgColor);
         }
 
+        mKeepOriginColor = a.getBoolean(R.styleable.AndRatingBar_keepOriginColor,false);
+
         // get customize drawable
         mStarDrawable = a.getResourceId(R.styleable.AndRatingBar_starDrawable, R.drawable.ic_rating_star_solid);
         if (a.hasValue(R.styleable.AndRatingBar_bgDrawable)) {
             mBgDrawable = a.getResourceId(R.styleable.AndRatingBar_bgDrawable, R.drawable.ic_rating_star_solid);
-        }else{
+        } else {
             mBgDrawable = mStarDrawable;
         }
 
         a.recycle();
 
-        mDrawable = new StarDrawable(context, mStarDrawable,mBgDrawable);
+        mDrawable = new StarDrawable(context, mStarDrawable, mBgDrawable, mKeepOriginColor);
         mDrawable.setStarCount(getNumStars());
         setProgressDrawable(mDrawable);
     }
@@ -198,7 +205,6 @@ public class AndRatingBar extends RatingBar {
                     drawable.setTintList(tintList);
                 }
             }
-
             // The drawable (or one of its children) may not have been
             // stateful before applying the tint, so let's try again.
             if (drawable.isStateful()) {

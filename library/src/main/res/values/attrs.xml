@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="AndRatingBar">
+        <!-- color of star -->
         <attr name="starColor" format="color|reference" />
 
+        <!-- color of secondary star -->
         <attr name="subStarColor" format="color|reference" />
 
+        <!-- color of background star -->
         <attr name="bgColor" format="color|reference" />
 
         <!-- drawable of star -->
         <attr name="starDrawable" format="reference"/>
 
-        <!-- drawable of background -->
+        <!-- drawable of background star -->
         <attr name="bgDrawable" format="reference"/>
+
+        <!-- if keep the origin color of star drawable -->
+        <attr name="keepOriginColor" format="boolean"/>
     </declare-styleable>
 </resources>

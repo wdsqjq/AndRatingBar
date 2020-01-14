@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.view.Gravity;
@@ -14,11 +13,11 @@ import androidx.appcompat.content.res.AppCompatResources;
 
 public class StarDrawable extends LayerDrawable {
 
-    public StarDrawable(Context context, int starDrawable, int bgDrawable) {
+    public StarDrawable(Context context, int starDrawable, int bgDrawable, boolean mKeepOriginColor) {
         super(new Drawable[]{
-                createLayerDrawableWithTintAttrRes(bgDrawable, R.attr.colorControlHighlight, context),
+                createLayerDrawableWithTintAttrRes(bgDrawable, R.attr.colorControlHighlight, context, mKeepOriginColor),
                 createClippedLayerDrawableWithTintColor(starDrawable, Color.TRANSPARENT, context),
-                createClippedLayerDrawableWithTintAttrRes(starDrawable, R.attr.colorControlActivated, context)
+                createClippedLayerDrawableWithTintAttrRes(starDrawable, R.attr.colorControlActivated, context, mKeepOriginColor)
         });
 
         setId(0, android.R.id.background);
@@ -27,8 +26,11 @@ public class StarDrawable extends LayerDrawable {
     }
 
     private static Drawable createLayerDrawableWithTintAttrRes(int tileRes, int tintAttrRes,
-                                                               Context context) {
-        int tintColor = getColorFromAttrRes(tintAttrRes, context);
+                                                               Context context, boolean mKeepOriginColor) {
+        int tintColor = -1;
+        if(!mKeepOriginColor){
+            tintColor = getColorFromAttrRes(tintAttrRes, context);
+        }
         return createLayerDrawableWithTintColor(tileRes, tintColor, context);
     }
 
@@ -44,16 +46,18 @@ public class StarDrawable extends LayerDrawable {
         TileDrawable drawable = new TileDrawable(AppCompatResources.getDrawable(context,
                 tileRes));
         drawable.mutate();
-        drawable.setTint(tintColor);
+        if(tintColor!=-1){
+            drawable.setTint(tintColor);
+        }
         return drawable;
     }
 
     @SuppressLint("RtlHardcoded")
     private static Drawable createClippedLayerDrawableWithTintAttrRes(int tileResId,
                                                                       int tintAttrRes,
-                                                                      Context context) {
+                                                                      Context context, boolean mKeepOriginColor) {
         return new ClipDrawable(createLayerDrawableWithTintAttrRes(tileResId, tintAttrRes,
-                context), Gravity.LEFT, ClipDrawable.HORIZONTAL);
+                context, mKeepOriginColor), Gravity.LEFT, ClipDrawable.HORIZONTAL);
     }
 
     public float getTileRatio() {
