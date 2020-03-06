@@ -23,15 +23,15 @@ class SizeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ratingBar1.setOnRatingChangeListener { ratingBar, rating ->
+        ratingBar1.setOnRatingChangeListener { _, rating ->
             Log.e("ratingBar", "rating:$rating")
         }
 
-        ratingBar2.setOnRatingChangeListener { ratingBar, rating ->
+        ratingBar2.setOnRatingChangeListener { _, rating ->
             Log.e("aaa", "rating:$rating")
         }
 
-        ratingBar3.setOnRatingChangeListener { ratingBar, rating ->
+        ratingBar3.setOnRatingChangeListener { _, rating ->
             Log.e("aaa", "rating:$rating")
         }
     }
