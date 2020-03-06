@@ -3,7 +3,7 @@
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21)
 
 A RatingBar library for android, you can customize size ,color and image easily!\
-安卓平台的RatingBar，可以自定义大小，颜色，图片样式等
+安卓RatingBar终极方案，继承自原生RatingBar，具有原生的滑动选择等特性，并且可以自定义大小，颜色，图标等
 
 **Customize Size**
 
