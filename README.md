@@ -75,3 +75,7 @@ AndRatingBar has it's own configuration as follows:
 * `app:subStarColor=""` set the subColor of star
 * `app:bgColor=""` set the background color of star
 * `app:keepOriginColor=""` set if keep the origin color of star drawable
+
+## License
+
+`AndRatingBar` is released under the Apache License version 2.0.
