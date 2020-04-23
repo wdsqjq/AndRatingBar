@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="16dp"/>
+        android:text="16dp" />
 
     <per.wsj.library.AndRatingBar
         android:layout_width="wrap_content"
         android:layout_height="16dp"
-        android:rating="1"/>
+        android:rating="1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="24dp"/>
+        android:text="24dp" />
 
     <per.wsj.library.AndRatingBar
         android:id="@+id/rb1"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
-        android:rating="2.5"/>
+        android:rating="2.5" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="32dp"/>
+        android:text="32dp" />
 
     <per.wsj.library.AndRatingBar
         android:layout_width="wrap_content"
         android:layout_height="32dp"
-        android:rating="2.5"/>
+        android:rating="2.5" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="36p"/>
+        android:text="36p" />
 
     <per.wsj.library.AndRatingBar
         android:id="@+id/ratingBar1"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:rating="3"/>
+        android:rating="3" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="48dp"/>
+        android:text="48dp" />
 
     <per.wsj.library.AndRatingBar
         android:id="@+id/ratingBar2"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:rating="4"/>
+        android:rating="4" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="56dp"/>
+        android:text="56dp" />
 
     <per.wsj.library.AndRatingBar
         android:id="@+id/ratingBar3"
         android:layout_width="wrap_content"
         android:layout_height="56dp"
-        android:rating="4.5"/>
+        android:rating="4.5" />
 
 </LinearLayout>

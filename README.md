@@ -2,12 +2,16 @@
 
 [![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![](https://jitpack.io/v/giswangsj/AndRatingBar.svg)](https://jitpack.io/#giswangsj/AndRatingBar)
 
-A RatingBar library for android, you can customize size ,color and image easily!\
-安卓RatingBar终极方案，继承自原生RatingBar，具有原生的滑动选择等特性，并且可以自定义大小，颜色，图标等
+A RatingBar library for android, you can customize size, spacing, color and image easily!\
+安卓RatingBar终极方案，继承自原生RatingBar，具有原生的滑动选择等特性，并且可以自定义大小，间距，颜色，图标等
 
 **Customize Size**
 
 ![Size Sample](screenshot/capture1.gif)
+
+**Customize Spacing**
+
+![Size Sample](screenshot/capture4.png)
 
 **Customize Color & Image**
 
@@ -30,7 +34,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.giswangsj:AndRatingBar:v1.0.1'
+	implementation 'com.github.giswangsj:AndRatingBar:1.0.2'
 }
 ```
 

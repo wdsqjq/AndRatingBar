@@ -8,18 +8,24 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="per.wsj.andratingbar.ui.SizeFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_size"
         tools:layout="@layout/fragment_size" />
+
+    <fragment
+        android:id="@+id/navigation_spacing"
+        android:name="per.wsj.andratingbar.ui.SpacingFragment"
+        android:label="@string/title_spacing"
+        tools:layout="@layout/fragment_spacing" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="per.wsj.andratingbar.ui.StyleFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_style"
         tools:layout="@layout/fragment_style" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="per.wsj.andratingbar.ui.ListFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_in_list"
         tools:layout="@layout/fragment_list" />
 </navigation>

@@ -1,8 +1,3 @@
-/*
- * Copyright (c) 2016 Zhang Hai <Dreaming.in.Code.ZH@Gmail.com>
- * All Rights Reserved.
- */
-
 package per.wsj.library;
 
 import android.content.res.ColorStateList;

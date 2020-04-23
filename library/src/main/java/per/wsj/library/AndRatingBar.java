@@ -1,21 +1,15 @@
-/*
- * Copyright (c) 2016 Zhang Hai <Dreaming.in.Code.ZH@Gmail.com>
- * All Rights Reserved.
- */
-
 package per.wsj.library;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RatingBar;
-
-import androidx.appcompat.widget.TintTypedArray;
 
 /**
  * Custom RatingBar
@@ -24,7 +18,6 @@ import androidx.appcompat.widget.TintTypedArray;
  * @date 2020-01-09
  */
 
-// AppCompatRatingBar will add undesired measuring behavior.
 @SuppressLint("AppCompatCustomView")
 public class AndRatingBar extends RatingBar {
 
@@ -58,6 +51,16 @@ public class AndRatingBar extends RatingBar {
      */
     private boolean mKeepOriginColor;
 
+    /**
+     * the scale factor of ratingbar that can change the spacing of star
+     */
+    private float scaleFactor;
+
+    /**
+     * additional the spacing of the star
+     */
+    private float starSpacing;
+
     private StarDrawable mDrawable;
 
     /**
@@ -83,34 +86,37 @@ public class AndRatingBar extends RatingBar {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-        TintTypedArray a = TintTypedArray.obtainStyledAttributes(context, attrs,
-                R.styleable.AndRatingBar, defStyleAttr, 0);
-        if (a.hasValue(R.styleable.AndRatingBar_starColor)) {
-            mStarColor = a.getColorStateList(
+//        TintTypedArray typedArray = TintTypedArray.obtainStyledAttributes(context, attrs,
+//                R.styleable.AndRatingBar, defStyleAttr, 0);
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AndRatingBar, defStyleAttr, 0);
+        if (typedArray.hasValue(R.styleable.AndRatingBar_starColor)) {
+            mStarColor = typedArray.getColorStateList(
                     R.styleable.AndRatingBar_starColor);
         }
 
-        if (a.hasValue(R.styleable.AndRatingBar_subStarColor)) {
-            mSubStarColor = a.getColorStateList(
+        if (typedArray.hasValue(R.styleable.AndRatingBar_subStarColor)) {
+            mSubStarColor = typedArray.getColorStateList(
                     R.styleable.AndRatingBar_subStarColor);
         }
 
-        if (a.hasValue(R.styleable.AndRatingBar_bgColor)) {
-            mBgColor = a.getColorStateList(
+        if (typedArray.hasValue(R.styleable.AndRatingBar_bgColor)) {
+            mBgColor = typedArray.getColorStateList(
                     R.styleable.AndRatingBar_bgColor);
         }
 
-        mKeepOriginColor = a.getBoolean(R.styleable.AndRatingBar_keepOriginColor,false);
+        mKeepOriginColor = typedArray.getBoolean(R.styleable.AndRatingBar_keepOriginColor, false);
+        scaleFactor = typedArray.getFloat(R.styleable.AndRatingBar_scaleFactor, 1);
+        starSpacing = typedArray.getDimension(R.styleable.AndRatingBar_starSpacing, 0);
 
         // get customize drawable
-        mStarDrawable = a.getResourceId(R.styleable.AndRatingBar_starDrawable, R.drawable.ic_rating_star_solid);
-        if (a.hasValue(R.styleable.AndRatingBar_bgDrawable)) {
-            mBgDrawable = a.getResourceId(R.styleable.AndRatingBar_bgDrawable, R.drawable.ic_rating_star_solid);
+        mStarDrawable = typedArray.getResourceId(R.styleable.AndRatingBar_starDrawable, R.drawable.ic_rating_star_solid);
+        if (typedArray.hasValue(R.styleable.AndRatingBar_bgDrawable)) {
+            mBgDrawable = typedArray.getResourceId(R.styleable.AndRatingBar_bgDrawable, R.drawable.ic_rating_star_solid);
         } else {
             mBgDrawable = mStarDrawable;
         }
 
-        a.recycle();
+        typedArray.recycle();
 
         mDrawable = new StarDrawable(context, mStarDrawable, mBgDrawable, mKeepOriginColor);
         mDrawable.setStarCount(getNumStars());
@@ -130,7 +136,7 @@ public class AndRatingBar extends RatingBar {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
         int height = getMeasuredHeight();
-        int width = Math.round(height * mDrawable.getTileRatio() * getNumStars());
+        int width = Math.round(height * mDrawable.getTileRatio() * getNumStars() * scaleFactor) + (int) ((getNumStars() - 1) * starSpacing);
         setMeasuredDimension(View.resolveSizeAndState(width, widthMeasureSpec, 0), height);
     }
 

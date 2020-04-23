@@ -18,5 +18,11 @@
 
         <!-- if keep the origin color of star drawable -->
         <attr name="keepOriginColor" format="boolean"/>
+
+        <!-- the scale factor of ratingbar that can change the spacing of star -->
+        <attr name="scaleFactor" format="float"/>
+
+        <!-- additional the spacing of the star -->
+        <attr name="starSpacing" format="dimension"/>
     </declare-styleable>
 </resources>

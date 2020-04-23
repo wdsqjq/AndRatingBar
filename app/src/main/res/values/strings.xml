@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">AndRatingBar</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_home">Size</string>
-    <string name="title_dashboard">Style</string>
-    <string name="title_notifications">List</string>
+    <string name="title_size">Size</string>
+    <string name="title_spacing">Spacing</string>
+    <string name="title_style">Style</string>
+    <string name="title_in_list">List</string>
     <string name="customize_count">customize count</string>
     <string name="customize_rating_image">customize rating image</string>
     <string name="customize_rating_color">customize rating color</string>

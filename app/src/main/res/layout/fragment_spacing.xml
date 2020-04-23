@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="按缩放比例设置star间距" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="0.8" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:scaleFactor="0.8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="0.9" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:scaleFactor="0.9" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="0.95" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:scaleFactor="0.95" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="1.0" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="1.05" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:scaleFactor="1.05" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="1.1" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:scaleFactor="1.1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="1.2" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:scaleFactor="1.2" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="直接设置间距(在默认基础上增加)" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="0dp" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="4dp" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:starSpacing="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="wrap_content"
+                android:text="8dp" />
+
+            <per.wsj.library.AndRatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:background="#dddddd"
+                android:rating="4"
+                app:starSpacing="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
