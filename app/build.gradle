@@ -47,5 +47,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation project(path: ':library')
-//    implementation 'com.github.giswangsj:AndRatingBar:v1.0.1'
+//    implementation 'com.github.giswangsj:AndRatingBar:1.0.2'
 }
