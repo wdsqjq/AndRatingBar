@@ -269,4 +269,22 @@ public class AndRatingBar extends RatingBar {
          */
         void onRatingChanged(AndRatingBar ratingBar, float rating);
     }
+
+    /**
+     * set the scale factor of the ratingbar
+     * @param scaleFactor
+     */
+    public void setScaleFactor(float scaleFactor) {
+        this.scaleFactor = scaleFactor;
+        requestLayout();
+    }
+
+    /**
+     * set the spacing of the star
+     * @param starSpacing
+     */
+    public void setStarSpacing(float starSpacing) {
+        this.starSpacing = starSpacing;
+        requestLayout();
+    }
 }

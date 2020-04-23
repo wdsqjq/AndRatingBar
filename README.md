@@ -11,7 +11,7 @@ A RatingBar library for android, you can customize size, spacing, color and imag
 
 **Customize Spacing**
 
-![Size Sample](screenshot/capture4.png)
+![Spacing Sample](screenshot/capture4.gif)
 
 **Customize Color & Image**
 
@@ -79,6 +79,8 @@ AndRatingBar has it's own configuration as follows:
 * `app:subStarColor=""` set the subColor of star
 * `app:bgColor=""` set the background color of star
 * `app:keepOriginColor=""` set if keep the origin color of star drawable
+* `app:starSpacing="4dp"` set the spacing of the star
+* `app:scaleFactor="1.2"` the sacle factor of the ratingbar which can change the spacing of the star
 
 ## License
 
