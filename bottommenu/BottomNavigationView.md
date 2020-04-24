@@ -1,0 +1,318 @@
+# 关于BottomNavigationView的姿势都在这里了
+
+
+
+一，基本用法
+----
+
+1，首先需要添加依赖：
+
+`implementation 'com.google.android.material:material:1.1.0'`
+
+2，布局文件中引入：
+
+```xml
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/nav_view"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="0dp"
+    android:layout_marginEnd="0dp"
+    android:background="?android:attr/windowBackground"
+    app:menu="@menu/bottom_nav_menu" />
+```
+
+3，常用属性：
+
+- app:itemTextColor  指的是导航栏文字的颜色，可以通过**selector**来控制选中和未选中的颜色
+- app:itemIconTint     指的是导航栏中图片的颜色
+- app:iteamBackground   指的是底部导航栏的背景颜色,默认是主题的颜色
+- app:menu  指的是布局（文字和图片都写在这个里面）
+
+4，menu文件：
+
+```xml
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_item1"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_size" />
+    <item
+        android:id="@+id/navigation_item2"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_style" />
+    <item
+        android:id="@+id/navigation_item3"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_in_list" />
+</menu>
+```
+
+​		在每个item中设置对应的icon和title即可。这里的icon可以是一个drawable，也可以是包含不同状态对应不同图片的**selector**。
+
+​		设置了menu后一个基本的底部菜单栏就有了。
+
+![simple](/picture/pic1.png)
+
+5，常用事件
+
+​		主要用两个事件`OnNavigationItemSelectedListener`和`OnNavigationItemReselectedListener`
+
+```kotlin
+nav_view.setOnNavigationItemSelectedListener(
+    BottomNavigationView.OnNavigationItemSelectedListener {
+    when (it.itemId) {
+        R.id.navigation_item1 -> {
+            Log.e("bottomMenuView:", "home")
+            return@OnNavigationItemSelectedListener true
+        }
+        R.id.navigation_item2 -> {
+            Log.e("bottomMenuView:", "dashboard")
+            return@OnNavigationItemSelectedListener true
+        }
+        R.id.navigation_item3 -> {
+            Log.e("bottomMenuView:", "notification")
+            return@OnNavigationItemSelectedListener true
+        }
+    }
+    false
+})
+```
+
+```kotlin
+nav_view.setOnNavigationItemReselectedListener(
+    BottomNavigationView.OnNavigationItemReselectedListener {
+    Log.e("bottomMenuView:", it.itemId.toString())
+})
+```
+
+​		两个事件的用法是一样的，区别在于：`OnNavigationItemSelectedListener`在item由未选中到选中状态时触发，而`OnNavigationItemReselectedListener`在item处于选中状态再次点击时触发。
+
+
+
+## 二，配合fragment
+
+​		单纯使用`BottomNavigationView`并没有什么卵用，一般都是配合fragment来使用。配合fragment使用时有三种方式：
+
+**1，FrameLayout + FragmentTransaction**
+
+​		比较古老的一种方式通过`getSupportFragmentManager().beginTransaction()`获取到`FragmentTransaction `，然后通过`FragmentTransaction`的`add`，`show`，`hide`等方法来控制fragment的显示，这种方式比较繁琐就不赘述了。
+
+**2，ViewPager**
+
+​		`ViewPager`一种比较流行的方式，当然你也可以用`ViewPager2`，用法差不多。需要在布局文件中添加`ViewPager`。
+
+​		**2.1，首先要设置ViewPager的adapter，如下：**
+
+```kotlin
+mFragments.add(Fragment1.newInstance())
+mFragments.add(Fragment2.newInstance())
+mFragments.add(Fragment3.newInstance())
+val adapter = object :
+    FragmentStatePagerAdapter(
+        supportFragmentManager,
+        BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
+    ) {
+    override fun getItem(position: Int): Fragment {
+        return mFragments[position]
+    }
+
+    override fun getCount(): Int {
+        return mFragments.size
+    }
+}
+
+viewPager.adapter = adapter
+```
+
+​		然后需要将`ViewPager`和`BottomNavigationView`绑定。
+
+​		**2.2，ViewPager绑定BottomNavigationView**
+
+​		就是在`ViewPager`切换时更改`BottomNavigationView`选中项
+
+```kotlin
+// 添加viewpager切换监听
+viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+    ...
+    override fun onPageSelected(position: Int) {
+        when (position) {
+            0 -> {
+                navigation.selectedItemId = R.id.navigation_item1
+            }
+            1 -> {
+                navigation.selectedItemId = R.id.navigation_item2
+            }
+            2 -> {
+                navigation.selectedItemId = R.id.navigation_item3
+            }
+        }
+    }
+})
+```
+
+​		**2.3，BottomNavigationView绑定ViewPager**
+
+​		同样的，需要在`BottomNavigationView`选中项改变时更改ViewPager：
+
+```kotlin
+navigation.setOnNavigationItemSelectedListener(
+    BottomNavigationView.OnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.navigation_item1 -> {
+                        viewPager.currentItem = 0
+                        return@OnNavigationItemSelectedListener true
+                    }
+                    R.id.navigation_item2 -> {
+                        viewPager.currentItem = 1
+                        return@OnNavigationItemSelectedListener true
+                    }
+                    R.id.navigation_item3 -> {
+                        viewPager.currentItem = 2
+                        return@OnNavigationItemSelectedListener true
+                    }
+                }
+                false
+            })
+```
+
+**3，配合navigation**
+
+​		这种方式是Google官方目前主推的方式，需要你对`navigation`有所了解。
+
+​		1，布局文件如下：
+
+```xml
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
+        android:background="?android:attr/windowBackground"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_nav_menu" />
+
+    <fragment
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/nav_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/mobile_navigation" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+```
+
+​		2，navigation文件
+
+```xml
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_item1"
+        android:name="per.wsj.bottommenu.ui.fragment.Fragment1"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_item2"
+        android:name="per.wsj.bottommenu.ui.fragment.Fragment2"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_item2"
+        android:name="per.wsj.bottommenu.ui.fragment.Fragment3"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+</navigation>
+```
+
+​		在navigation中指定了对应的fragment
+
+​		3，Activity中
+
+​		接下来的使用就很简单了，调用Activity的扩展方法`findNavController`，根据布局文件中的`fragment`标签的id获取`NavController`，将`NavController`和`BottomNavigationView`绑定即可，如下：
+
+```kotlin
+val navView: BottomNavigationView = findViewById(R.id.nav_view)
+val navController = findNavController(R.id.nav_host_fragment)
+navView.setupWithNavController(navController)
+```
+
+​		效果如下：
+
+![simple preview](/picture/simple.gif)
+
+
+
+
+三，显示badge(角标/悬浮徽章)
+----
+
+
+
+
+
+## 四，常用需求
+
+​		1，动态隐藏MenuItem
+
+​		有些时候需要根据条件来控制menuItem是否显示，有两种方式可以实现：
+
+```kotlin
+val navView: BottomNavigationView = findViewById(R.id.nav_view)
+// 方式一：
+navView.menu.findItem(R.id.navigation_spacing).isVisible = false
+// 方式二：
+navView.menu.removeItem(R.id.navigation_spacing)
+```
+
+​		2，更改字体颜色
+
+​		创建selector：
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="#ff0000" android:state_checked="true"/>
+    <item android:color="#00ff00" android:state_checked="false"/>
+</selector>
+```
+
+​		设置`app:itemTextColor`属性：
+
+```xml
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/nav_view"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/windowBackground"
+    app:itemTextColor="@drawable/selector_menu_text_color"
+    app:menu="@menu/bottom_nav_menu" />
+```
+
+
+
+https://mp.weixin.qq.com/s/k6GUzoE5b-MiekmrO9_VTg?
+
+
+
+http://www.imooc.com/article/281803
