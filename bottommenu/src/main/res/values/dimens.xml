@@ -1,5 +1,13 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--修改默认（未选中）的文字大小 -->
+    <!--<dimen name="design_bottom_navigation_text_size">14sp</dimen>
+    &lt;!&ndash;修改选中的文字大小 &ndash;&gt;
+    <dimen name="design_bottom_navigation_active_text_size">14sp</dimen>-->
+
+<!--    <dimen name="design_bottom_navigation_margin">4dp</dimen>-->
+
 </resources>

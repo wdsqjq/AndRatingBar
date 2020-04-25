@@ -1,13 +1,16 @@
 package per.wsj.bottommenu
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.badge.BadgeDrawable
 import per.wsj.bottommenu.ui.activity.Main2Activity
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +31,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        startActivity(Intent(this, Main2Activity::class.java))
+        val badge = navView.getOrCreateBadge(R.id.navigation_dashboard)
+        badge.number = 108
+        badge.backgroundColor = Color.RED
+        badge.maxCharacterCount = 3
+        badge.badgeGravity
+//        badge.badgeTextColor
+//        badge.maxCharacterCount
+//        badge.clearNumber()
     }
 }
