@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -16,6 +17,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.lang.reflect.Field;
 
 public class Hooker {
+    /**
+     * 文字下移
+     *
+     * @param menu
+     */
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static void hookBnv(BottomNavigationView menu) {
         try {
@@ -39,7 +45,7 @@ public class Hooker {
 //                layoutParams.bottomMargin = -15;
 //                ((ViewGroup) smallLabel.getParent()).setLayoutParams(layoutParams);
                 // 方式二:
-                ((ViewGroup) smallLabel.getParent()).scrollBy(0,-20);
+                ((ViewGroup) smallLabel.getParent()).scrollBy(0, -20);
             }
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();

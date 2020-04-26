@@ -531,6 +531,10 @@ nav_view.itemIconTintList = null
 
 ​		该值默认是把8dp，把它调小了，发现图标和文字的距离变大了，这是怎么回事？其实这个距离并不是图标和文字的间距，而是图标距离顶部和底部的`Margin`值，调小后到顶部的距离也变小了，就显得图标和文字的距离变大了。
 
+​		如果你有显示badge的需求，那这种方式就出问题了，因为badge是依附于图标的，图标上移，badge也会跟着上移，可以就显示不全了
+
+![top_diatance_error](picture/top_distance_error.png)
+
 ​		7.2 调整文字到底部的距离
 
 ​		那么如果我想调整文字到底部的距离呢？这就需要了解一下每个Item的布局文件`design_bottom_navigation_item.xml`，其源代码（部分代码省略）如下：
@@ -607,6 +611,10 @@ public static void hookBnv(BottomNavigationView menu) throws Exception{
 ```
 <dimen name="design_bottom_navigation_height">84dp</dimen>
 ```
+
+## 四，结语
+
+​		关于`BottomNavigationView`可能用到的知识点就这些了，如果你还有还有什么奇葩的需求，那就去**“look the fuck resource code”** 吧
 
 
 
