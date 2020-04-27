@@ -12,4 +12,5 @@
     <string name="customize_background_color">customize background color</string>
     <string name="customize_background_image">customize background image</string>
     <string name="keep_origin_color">keep origin color</string>
+    <string name="left_to_right">left to right</string>
 </resources>

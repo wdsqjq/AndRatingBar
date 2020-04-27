@@ -12,4 +12,5 @@
     <string name="customize_background_color">自定义背景颜色</string>
     <string name="customize_background_image">自定义背景图片</string>
     <string name="keep_origin_color">保持图标原色</string>
+    <string name="left_to_right">从右往左</string>
 </resources>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -61,6 +62,11 @@ public class AndRatingBar extends RatingBar {
      */
     private float starSpacing;
 
+    /**
+     * right to left
+     */
+    private boolean right2Left;
+
     private StarDrawable mDrawable;
 
     /**
@@ -89,19 +95,33 @@ public class AndRatingBar extends RatingBar {
 //        TintTypedArray typedArray = TintTypedArray.obtainStyledAttributes(context, attrs,
 //                R.styleable.AndRatingBar, defStyleAttr, 0);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AndRatingBar, defStyleAttr, 0);
+        right2Left = typedArray.getBoolean(R.styleable.AndRatingBar_right2Left, false);
+
         if (typedArray.hasValue(R.styleable.AndRatingBar_starColor)) {
-            mStarColor = typedArray.getColorStateList(
-                    R.styleable.AndRatingBar_starColor);
+            if (right2Left) {
+                mBgColor = typedArray.getColorStateList(
+                        R.styleable.AndRatingBar_starColor);
+            } else {
+                mStarColor = typedArray.getColorStateList(
+                        R.styleable.AndRatingBar_starColor);
+            }
         }
 
         if (typedArray.hasValue(R.styleable.AndRatingBar_subStarColor)) {
-            mSubStarColor = typedArray.getColorStateList(
-                    R.styleable.AndRatingBar_subStarColor);
+            if (!right2Left) {
+                mSubStarColor = typedArray.getColorStateList(
+                        R.styleable.AndRatingBar_subStarColor);
+            }
         }
 
         if (typedArray.hasValue(R.styleable.AndRatingBar_bgColor)) {
-            mBgColor = typedArray.getColorStateList(
-                    R.styleable.AndRatingBar_bgColor);
+            if (right2Left) {
+                mStarColor = typedArray.getColorStateList(
+                        R.styleable.AndRatingBar_bgColor);
+            } else {
+                mBgColor = typedArray.getColorStateList(
+                        R.styleable.AndRatingBar_bgColor);
+            }
         }
 
         mKeepOriginColor = typedArray.getBoolean(R.styleable.AndRatingBar_keepOriginColor, false);
@@ -116,11 +136,16 @@ public class AndRatingBar extends RatingBar {
             mBgDrawable = mStarDrawable;
         }
 
+
         typedArray.recycle();
 
         mDrawable = new StarDrawable(context, mStarDrawable, mBgDrawable, mKeepOriginColor);
         mDrawable.setStarCount(getNumStars());
         setProgressDrawable(mDrawable);
+
+        if (right2Left) {
+            setRating(getNumStars() - getRating());
+        }
     }
 
     @Override
@@ -138,6 +163,13 @@ public class AndRatingBar extends RatingBar {
         int height = getMeasuredHeight();
         int width = Math.round(height * mDrawable.getTileRatio() * getNumStars() * scaleFactor) + (int) ((getNumStars() - 1) * starSpacing);
         setMeasuredDimension(View.resolveSizeAndState(width, widthMeasureSpec, 0), height);
+    }
+
+    @Override
+    protected synchronized void onDraw(Canvas canvas) {
+//        canvas.translate(getWidth() - getPaddingRight(), getPaddingTop());
+//        canvas.scale(-1.0f, 1.0f);
+        super.onDraw(canvas);
     }
 
     @Override
@@ -235,6 +267,11 @@ public class AndRatingBar extends RatingBar {
      */
     public void setOnRatingChangeListener(OnRatingChangeListener listener) {
         mOnRatingChangeListener = listener;
+        if (right2Left) {
+            mOnRatingChangeListener.onRatingChanged(this, getNumStars() - getRating());
+        } else {
+            mOnRatingChangeListener.onRatingChanged(this, getRating());
+        }
     }
 
     @Override
@@ -245,7 +282,11 @@ public class AndRatingBar extends RatingBar {
         // updateSecondaryProgress() from onProgressRefresh().
         float rating = getRating();
         if (mOnRatingChangeListener != null && rating != mTempRating) {
-            mOnRatingChangeListener.onRatingChanged(this, rating);
+            if (right2Left) {
+                mOnRatingChangeListener.onRatingChanged(this, getNumStars() - rating);
+            } else {
+                mOnRatingChangeListener.onRatingChanged(this, rating);
+            }
         }
         mTempRating = rating;
     }
@@ -272,6 +313,7 @@ public class AndRatingBar extends RatingBar {
 
     /**
      * set the scale factor of the ratingbar
+     *
      * @param scaleFactor
      */
     public void setScaleFactor(float scaleFactor) {
@@ -281,6 +323,7 @@ public class AndRatingBar extends RatingBar {
 
     /**
      * set the spacing of the star
+     *
      * @param starSpacing
      */
     public void setStarSpacing(float starSpacing) {
