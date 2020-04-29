@@ -7,9 +7,12 @@ import android.graphics.Color;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.view.Gravity;
 
 import androidx.appcompat.content.res.AppCompatResources;
+
+import java.lang.reflect.Field;
 
 public class StarDrawable extends LayerDrawable {
 
@@ -80,7 +83,21 @@ public class StarDrawable extends LayerDrawable {
             case android.R.id.secondaryProgress:
             case android.R.id.progress: {
                 ClipDrawable clipDrawable = (ClipDrawable) layerDrawable;
-                return (TileDrawable) clipDrawable.getDrawable();
+                // fix bug:sdk<23 class ClipDrawable has no getDrawable() #8
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    return (TileDrawable) clipDrawable.getDrawable();
+                }else {
+                    try {
+                        Field mStateField = clipDrawable.getClass().getDeclaredField("mState");
+                        mStateField.setAccessible(true);
+                        Object clipState = mStateField.get(clipDrawable);
+                        Field mDrawableField = clipState.getClass().getDeclaredField("mDrawable");
+                        mDrawableField.setAccessible(true);
+                        return (TileDrawable) mDrawableField.get(clipState);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
             default:
                 // Should never reach here.
