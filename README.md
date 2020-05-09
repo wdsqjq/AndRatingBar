@@ -28,7 +28,6 @@ A RatingBar library for android, you can customize size, spacing, color and imag
 Implementation
 ----
 
-Via Gradle:
 
 ```xml
 allprojects {
@@ -38,7 +37,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.giswangsj:AndRatingBar:1.0.3'
+	implementation 'com.github.giswangsj:AndRatingBar:1.0.4'
 }
 ```
 

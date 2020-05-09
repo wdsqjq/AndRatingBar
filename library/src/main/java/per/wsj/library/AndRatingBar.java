@@ -166,13 +166,6 @@ public class AndRatingBar extends RatingBar {
     }
 
     @Override
-    protected synchronized void onDraw(Canvas canvas) {
-//        canvas.translate(getWidth() - getPaddingRight(), getPaddingTop());
-//        canvas.scale(-1.0f, 1.0f);
-        super.onDraw(canvas);
-    }
-
-    @Override
     public void setProgressDrawable(Drawable d) {
         super.setProgressDrawable(d);
         applyProgressTints();
