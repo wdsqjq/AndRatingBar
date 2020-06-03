@@ -1,6 +1,7 @@
 package per.wsj.bottommenu
 
 import android.annotation.SuppressLint
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.Drawable
@@ -14,6 +15,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.badge.BadgeDrawable
 import com.google.android.material.badge.BadgeUtils
+import com.google.android.material.shape.MaterialShapeDrawable
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,12 +37,11 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         val badge = navView.getOrCreateBadge(R.id.navigation_dashboard)
-        badge.number = 108
+        badge.number = 18
         badge.backgroundColor = Color.RED
         badge.maxCharacterCount = 3
 //        badge.badgeGravity = BadgeDrawable.TOP_START
 
-        Log.e("badge", "width:" + badge.intrinsicWidth)
         Log.e("badge", "height:" + badge.intrinsicHeight)
 
         val badgeDrawableClass = BadgeDrawable::class.java
@@ -52,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 //        badgeBounds.top += 4
 //        badgeBounds.bottom += 4
         Log.e("badge badgeBounds2", badgeBoundsField.get(badge).toString())
+        val rect = badgeBoundsField.get(badge) as Rect
 
         val badgeCenterXField = badgeDrawableClass.getDeclaredField("badgeCenterX")
         badgeCenterXField.isAccessible = true
@@ -61,9 +63,9 @@ class MainActivity : AppCompatActivity() {
         val badgeCenterYField = badgeDrawableClass.getDeclaredField("badgeCenterY")
         badgeCenterYField.isAccessible = true
 
-        Log.e("badge badgeCenterY1", badgeCenterYField.get(badge).toString())
-        badgeCenterYField.set(badge, 4)
-        Log.e("badge badgeCenterY2", badgeCenterYField.get(badge).toString())
+//        Log.e("badge badgeCenterY1", badgeCenterYField.get(badge).toString())
+//        badgeCenterYField.set(badge, 4)
+//        Log.e("badge badgeCenterY2", badgeCenterYField.get(badge).toString())
 
         val halfBadgeWidthField = badgeDrawableClass.getDeclaredField("halfBadgeWidth")
         halfBadgeWidthField.isAccessible = true
@@ -76,12 +78,18 @@ class MainActivity : AppCompatActivity() {
         Log.e("badge halfBadgeHeight", halfBadgeHeight.toString())
 
         BadgeUtils.updateBadgeBounds(
-            badgeBoundsField.get(badge) as Rect, badgeCenterX as Float, 10f,
+            rect, badgeCenterX as Float, 10f,
             halfBadgeWidth as Float,
             halfBadgeHeight as Float
         )
 
+        val shapeDrawableField = badgeDrawableClass.getDeclaredField("shapeDrawable")
+        shapeDrawableField.isAccessible = true
+        (shapeDrawableField.get(badge) as MaterialShapeDrawable).bounds = badgeBoundsField.get(badge) as Rect
+
         badge.invalidateSelf()
         Log.e("badge badgeBounds3", badgeBoundsField.get(badge).toString())
+
+        badge.setVisible(true,false)
     }
 }

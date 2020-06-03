@@ -374,7 +374,16 @@ badge.number = 20
 </style>
 ```
 
-​		
+​		5，扩展
+
+​		同样是位于`com.google.android.material`包中的`TabLayout`也可以用同样的方式添加badge
+
+```kotlin
+tabLayout.getTabAt(0).orCreateBadge.apply {
+    number = 10
+    backgroundColor = Color.RED
+}
+```
 
 
 

@@ -61,6 +61,7 @@
             <per.wsj.library.AndRatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
+                android:isIndicator="true"
                 android:rating="2.5"
                 app:starDrawable="@drawable/ic_rating_star_flower" />
 

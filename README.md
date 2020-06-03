@@ -7,7 +7,7 @@ A RatingBar library for android, you can customize size, spacing, color and imag
 
 **Customize Size**
 
-![Size Sample](screenshot/capture1.gif)
+![Size Sample](https://wangsj.oss-cn-shanghai.aliyuncs.com/img/capture1.gif)
 
 **Customize Spacing**
 
