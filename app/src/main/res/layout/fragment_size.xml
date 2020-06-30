@@ -44,13 +44,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="36p" />
+        android:text="36dp" />
 
-    <per.wsj.library.AndRatingBar
-        android:id="@+id/ratingBar1"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:rating="3" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <per.wsj.library.AndRatingBar
+            android:id="@+id/ratingBar1"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:rating="3" />
+
+        <TextView
+            android:id="@+id/tvRatingValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="16sp"
+            android:layout_marginLeft="16dp"/>
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"

@@ -25,6 +25,7 @@ class SizeFragment : Fragment() {
 
         ratingBar1.setOnRatingChangeListener { _, rating ->
             Log.e("ratingBar", "rating:$rating")
+            tvRatingValue.text = "value:$rating"
         }
 
         ratingBar2.setOnRatingChangeListener { _, rating ->
