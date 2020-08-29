@@ -88,7 +88,8 @@ public class StarDrawable extends LayerDrawable {
                     return (TileDrawable) clipDrawable.getDrawable();
                 }else {
                     try {
-                        Field mStateField = clipDrawable.getClass().getDeclaredField("mState");
+                        String fieldState = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 ? "mState" : "mClipState";
+                        Field mStateField = clipDrawable.getClass().getDeclaredField(fieldState);
                         mStateField.setAccessible(true);
                         Object clipState = mStateField.get(clipDrawable);
                         Field mDrawableField = clipState.getClass().getDeclaredField("mDrawable");
