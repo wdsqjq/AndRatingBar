@@ -37,7 +37,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.giswangsj:AndRatingBar:1.0.4'
+	implementation 'com.github.giswangsj:AndRatingBar:1.0.5'
 }
 ```
 
