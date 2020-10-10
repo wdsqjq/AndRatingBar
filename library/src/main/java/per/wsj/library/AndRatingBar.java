@@ -136,7 +136,6 @@ public class AndRatingBar extends RatingBar {
             mBgDrawable = mStarDrawable;
         }
 
-
         typedArray.recycle();
 
         mDrawable = new StarDrawable(context, mStarDrawable, mBgDrawable, mKeepOriginColor);
