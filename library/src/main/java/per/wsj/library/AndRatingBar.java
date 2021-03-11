@@ -243,29 +243,6 @@ public class AndRatingBar extends RatingBar {
         }
     }
 
-    /**
-     * Get the listener that is listening for rating change events.
-     *
-     * @return The listener, may be null.
-     */
-    public OnRatingChangeListener getOnRatingChangeListener() {
-        return mOnRatingChangeListener;
-    }
-
-    /**
-     * Sets the listener to be called when the rating changes.
-     *
-     * @param listener The listener.
-     */
-    public void setOnRatingChangeListener(OnRatingChangeListener listener) {
-        mOnRatingChangeListener = listener;
-        if (right2Left) {
-            mOnRatingChangeListener.onRatingChanged(this, getNumStars() - getRating());
-        } else {
-            mOnRatingChangeListener.onRatingChanged(this, getRating());
-        }
-    }
-
     @Override
     public synchronized void setSecondaryProgress(int secondaryProgress) {
         super.setSecondaryProgress(secondaryProgress);
@@ -301,6 +278,21 @@ public class AndRatingBar extends RatingBar {
          * @param rating    The current rating. This will be in the range 0..numStars.
          */
         void onRatingChanged(AndRatingBar ratingBar, float rating);
+    }
+
+
+    /**
+     * Sets the listener to be called when the rating changes.
+     *
+     * @param listener The listener.
+     */
+    public void setOnRatingChangeListener(OnRatingChangeListener listener) {
+        mOnRatingChangeListener = listener;
+        if (right2Left) {
+            mOnRatingChangeListener.onRatingChanged(this, getNumStars() - getRating());
+        } else {
+            mOnRatingChangeListener.onRatingChanged(this, getRating());
+        }
     }
 
     /**
