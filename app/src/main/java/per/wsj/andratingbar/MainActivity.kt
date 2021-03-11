@@ -2,6 +2,7 @@ package per.wsj.andratingbar
 
 import android.graphics.Color
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -9,6 +10,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+import com.sdsmdg.tastytoast.TastyToast
+import es.dmoral.toasty.Toasty
 
 class MainActivity : AppCompatActivity() {
 
