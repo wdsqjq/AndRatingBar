@@ -81,7 +81,7 @@ public class AndRatingBar extends RatingBar {
     }
 
     public AndRatingBar(Context context, AttributeSet attrs) {
-        // notice:can't use this(context, attrs, 0); because ratingbar has it's own defStyleAttr
+        // notice:can't use this(context, attrs, 0); because ratingbar has it's own defStyleAttr    com.android.internal.R.attr.ratingBarStyle
         super(context, attrs);
         init(context, attrs, 0);
     }
@@ -161,7 +161,7 @@ public class AndRatingBar extends RatingBar {
 
         int height = getMeasuredHeight();
         int width = Math.round(height * mDrawable.getTileRatio() * getNumStars() * scaleFactor) + (int) ((getNumStars() - 1) * starSpacing);
-        setMeasuredDimension(View.resolveSizeAndState(width, widthMeasureSpec, 0), height);
+        setMeasuredDimension(resolveSizeAndState(width, widthMeasureSpec, 0), height);
     }
 
     @Override
