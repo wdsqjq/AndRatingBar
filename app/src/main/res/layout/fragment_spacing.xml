@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="按缩放比例设置star间距"
+            android:text="@string/set_spacing_by_scale_factor"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="直接设置间距(在默认基础上增加)"
+            android:text="@string/set_spacing_directly"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -73,7 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp"
-            android:text="当前间距:0" />
+            android:text="当前额外间距：0" />
 
     </LinearLayout>
 

@@ -29,7 +29,7 @@ class SpacingFragment : Fragment() {
         seekBar1.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val factor = formatNum(0.01 * progress + 0.8)
-                tvScaleFactor.text = "当前比例：$factor"
+                tvScaleFactor.text = getString(R.string.current_factor, factor.toString())
                 // set scale factor
                 ratingBar1.setScaleFactor(factor)
             }
@@ -47,7 +47,7 @@ class SpacingFragment : Fragment() {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 val spacing = (progress - 15).toFloat()
                 ratingBar2.setStarSpacing(dip2px(requireContext(), spacing).toFloat())
-                tvSpacing.text = "当前间距：$spacing dp"
+                tvSpacing.text = getString(R.string.current_spacing, spacing.toString())
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {

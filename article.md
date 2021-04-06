@@ -112,7 +112,7 @@ private void computeBitmapSize() {
 
 `RatingBar`没有自己计算高度直接调用`getMeasuredHeight()` ，因此高度的计算是在父类中完成。
 
-父类`AdbSeekBar`的`onMeasure()`实现如下：
+父类`AbsSeekBar`的`onMeasure()`实现如下：
 
 ```java
 @Override
@@ -137,7 +137,7 @@ protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpe
 }
 ```
 
-因此父类`AdbSeekBar`是根据drawable的原始高度进行计算的。
+因此父类`AdbSeekBar`是根据`drawable`的原始高度及`minHeight`，`maxHeight`进行计算的。
 
 **1.3  总结**
 
@@ -175,7 +175,9 @@ RatingBar提供了三种样式，可以从整个app的`theme`：`Theme.MaterialC
 
 其中`minHeight`和`maxHeight`可以控制控件的高度，而`progressDrawable`设置的图片控制着星星的大小。他们的大小分别是48dp，36dp，16dp。
 
+> PS；以上测量出来的宽高度只能控制这个view的大小，并不能改变内部星星的显示大小。
 
+#### 2，绘制：
 
 
 

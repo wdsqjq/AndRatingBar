@@ -13,4 +13,8 @@
     <string name="customize_background_image">customize background image</string>
     <string name="keep_origin_color">keep origin color</string>
     <string name="left_to_right">left to right</string>
+    <string name="set_spacing_by_scale_factor">set spacing by scale factor</string>
+    <string name="current_factor">current factor %s</string>
+    <string name="set_spacing_directly">set extra spacing (based on default spacing)</string>
+    <string name="current_spacing">current extra spacing: %s dp</string>
 </resources>

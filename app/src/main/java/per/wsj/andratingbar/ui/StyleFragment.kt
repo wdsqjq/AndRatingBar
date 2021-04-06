@@ -20,8 +20,8 @@ class StyleFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ratingBar3.setOnRatingChangeListener { ratingBar, rating ->
-            tvRate.text = "当前rate:$rating"
+        ratingBar3.setOnRatingChangeListener { ratingBar, rating, fromUser ->
+            tvRate.text = "当前rate:$rating -- fromUser: $fromUser"
         }
     }
 }

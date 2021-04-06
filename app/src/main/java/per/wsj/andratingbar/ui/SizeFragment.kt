@@ -1,6 +1,5 @@
 package per.wsj.andratingbar.ui
 
-import android.graphics.drawable.ClipDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,17 +22,23 @@ class SizeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ratingBar1.setOnRatingChangeListener { _, rating ->
-            Log.e("ratingBar", "rating:$rating")
+//        ratingBar0.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+//            Log.e("ratingBar0", "rating:$rating -- fromUser: $fromUser")
+//        }
+
+        ratingBar1.setOnRatingChangeListener { _, rating, fromUser ->
+            Log.e("ratingBar1", "rating:$rating -- fromUser: $fromUser")
             tvRatingValue.text = "value:$rating"
         }
 
-        ratingBar2.setOnRatingChangeListener { _, rating ->
-            Log.e("aaa", "rating:$rating")
+        ratingBar1.rating = 4.0f
+
+        ratingBar2.setOnRatingChangeListener { _, rating, fromUser ->
+            Log.e("ratingBar2", "rating:$rating -- fromUser: $fromUser")
         }
 
-        ratingBar3.setOnRatingChangeListener { _, rating ->
-            Log.e("aaa", "rating:$rating")
+        ratingBar3.setOnRatingChangeListener { _, rating, fromUser ->
+            Log.e("ratingBar3", "rating:$rating -- fromUser: $fromUser")
         }
     }
 }

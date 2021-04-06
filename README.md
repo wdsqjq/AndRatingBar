@@ -55,10 +55,10 @@ In your layout file:
         android:rating="2.5"/>
 ```
 
-Event Listener
+Event Listener:
 ```xml
-ratingBar.setOnRatingChangeListener { ratingBar, rating ->
-   Log.e("ratingBar", "rating:$rating")
+ratingBar.setOnRatingChangeListener { ratingBar, rating, fromUser ->
+   Log.e("ratingBar", "rating:$rating -- fromUser: $fromUser")
 }
 ```
 

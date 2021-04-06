@@ -13,4 +13,8 @@
     <string name="customize_background_image">自定义背景图片</string>
     <string name="keep_origin_color">保持图标原色</string>
     <string name="left_to_right">从右往左</string>
+    <string name="set_spacing_by_scale_factor">按缩放比例设置star间距</string>
+    <string name="current_factor">当前比例 %s</string>
+    <string name="set_spacing_directly">设置额外间距(在默认基础上增加)</string>
+    <string name="current_spacing">当前额外间距: %s dp</string>
 </resources>

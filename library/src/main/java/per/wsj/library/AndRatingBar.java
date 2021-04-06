@@ -9,6 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 
@@ -20,7 +21,7 @@ import android.widget.RatingBar;
  */
 
 @SuppressLint("AppCompatCustomView")
-public class AndRatingBar extends RatingBar {
+public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChangeListener {
 
     /**
      * color of rating star
@@ -243,11 +244,11 @@ public class AndRatingBar extends RatingBar {
         }
     }
 
-    @Override
+    /*@Override
     public synchronized void setSecondaryProgress(int secondaryProgress) {
         super.setSecondaryProgress(secondaryProgress);
 
-        // HACK: Check and call our listener here because this method is always called by
+        // Check and call our listener here because this method is always called by
         // updateSecondaryProgress() from onProgressRefresh().
         float rating = getRating();
         if (mOnRatingChangeListener != null && rating != mTempRating) {
@@ -258,26 +259,30 @@ public class AndRatingBar extends RatingBar {
             }
         }
         mTempRating = rating;
-    }
+    }*/
 
     /**
-     * A callback that notifies clients when the rating has been changed. This includes changes that
-     * were initiated by the user through a touch gesture or arrow key/trackball as well as changes
-     * that were initiated programmatically. This callback <strong>will</strong> be called
-     * continuously while the user is dragging, different from framework's
-     * {@link OnRatingBarChangeListener}.
+     * A callback that notifies clients when the rating has been changed. This
+     * includes changes that were initiated by the user through a touch gesture
+     * or arrow key/trackball as well as changes that were initiated
+     * programmatically.
      */
     public interface OnRatingChangeListener {
 
         /**
-         * Notification that the rating has changed. This <strong>will</strong> be called
-         * continuously while the user is dragging, different from framework's
-         * {@link OnRatingBarChangeListener}.
+         * Notification that the rating has changed. Clients can use the
+         * fromUser parameter to distinguish user-initiated changes from those
+         * that occurred programmatically. This will not be called continuously
+         * while the user is dragging, only when the user finalizes a rating by
+         * lifting the touch.
          *
          * @param ratingBar The RatingBar whose rating has changed.
-         * @param rating    The current rating. This will be in the range 0..numStars.
+         * @param rating    The current rating. This will be in the range
+         *                  0..numStars.
+         * @param fromUser  True if the rating change was initiated by a user's
+         *                  touch gesture or arrow key/horizontal trackbell movement.
          */
-        void onRatingChanged(AndRatingBar ratingBar, float rating);
+        void onRatingChanged(AndRatingBar ratingBar, float rating, boolean fromUser);
     }
 
 
@@ -288,11 +293,25 @@ public class AndRatingBar extends RatingBar {
      */
     public void setOnRatingChangeListener(OnRatingChangeListener listener) {
         mOnRatingChangeListener = listener;
-        if (right2Left) {
-            mOnRatingChangeListener.onRatingChanged(this, getNumStars() - getRating());
-        } else {
-            mOnRatingChangeListener.onRatingChanged(this, getRating());
+//        if (right2Left) {
+//            mOnRatingChangeListener.onRatingChanged(this, getNumStars() - getRating());
+//        } else {
+//            mOnRatingChangeListener.onRatingChanged(this, getRating());
+//        }
+        setOnRatingBarChangeListener(this);
+    }
+
+    @Override
+    public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//        float rating = getRating();
+        if (mOnRatingChangeListener != null && rating != mTempRating) {
+            if (right2Left) {
+                mOnRatingChangeListener.onRatingChanged(this, getNumStars() - rating, fromUser);
+            } else {
+                mOnRatingChangeListener.onRatingChanged(this, rating, fromUser);
+            }
         }
+        mTempRating = rating;
     }
 
     /**
