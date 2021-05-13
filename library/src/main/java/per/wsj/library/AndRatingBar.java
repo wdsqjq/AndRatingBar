@@ -244,22 +244,6 @@ public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChan
         }
     }
 
-    /*@Override
-    public synchronized void setSecondaryProgress(int secondaryProgress) {
-        super.setSecondaryProgress(secondaryProgress);
-
-        // Check and call our listener here because this method is always called by
-        // updateSecondaryProgress() from onProgressRefresh().
-        float rating = getRating();
-        if (mOnRatingChangeListener != null && rating != mTempRating) {
-            if (right2Left) {
-                mOnRatingChangeListener.onRatingChanged(this, getNumStars() - rating);
-            } else {
-                mOnRatingChangeListener.onRatingChanged(this, rating);
-            }
-        }
-        mTempRating = rating;
-    }*/
 
     /**
      * A callback that notifies clients when the rating has been changed. This
@@ -293,17 +277,11 @@ public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChan
      */
     public void setOnRatingChangeListener(OnRatingChangeListener listener) {
         mOnRatingChangeListener = listener;
-//        if (right2Left) {
-//            mOnRatingChangeListener.onRatingChanged(this, getNumStars() - getRating());
-//        } else {
-//            mOnRatingChangeListener.onRatingChanged(this, getRating());
-//        }
         setOnRatingBarChangeListener(this);
     }
 
     @Override
     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-//        float rating = getRating();
         if (mOnRatingChangeListener != null && rating != mTempRating) {
             if (right2Left) {
                 mOnRatingChangeListener.onRatingChanged(this, getNumStars() - rating, fromUser);

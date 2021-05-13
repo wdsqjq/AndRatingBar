@@ -139,9 +139,9 @@ protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpe
 
 因此父类`AdbSeekBar`是根据`drawable`的原始高度及`minHeight`，`maxHeight`进行计算的。
 
-**1.3  总结**
+**1.3  小结**
 
-`RatingBar`的宽高度只跟图片的大小相关，不能根据设置的宽高自适应。那么这些图片的宽高是多少呢？
+`RatingBar`的宽度只跟图片的大小相关，高度和图片大小以及`minHeight`，`maxHeight`相关，不能根据设置的宽高自适应。那么这些图片的宽高是多少呢？
 
 RatingBar提供了三种样式，可以从整个app的`theme`：`Theme.MaterialComponents.Light.DarkActionBar`开始寻找
 
@@ -175,7 +175,7 @@ RatingBar提供了三种样式，可以从整个app的`theme`：`Theme.MaterialC
 
 其中`minHeight`和`maxHeight`可以控制控件的高度，而`progressDrawable`设置的图片控制着星星的大小。他们的大小分别是48dp，36dp，16dp。
 
-> PS；以上测量出来的宽高度只能控制这个view的大小，并不能改变内部星星的显示大小。
+> 注意：以上测量出来的宽高度只能控制这个view的大小，并不能改变内部星星的显示大小。
 
 #### 2，绘制：
 
@@ -185,4 +185,67 @@ RatingBar提供了三种样式，可以从整个app的`theme`：`Theme.MaterialC
 
 
 
+最后，说一个比较复杂的Drawable，是进度条相关的。
+
+**LayerDrawable**：对应`Seekbar android:progressDrawable`
+
+通常，我们用XML定义一个进度条的ProgressDrawable是这样的，
+
+```xml
+<!--ProgressDrawable-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background" android:drawable="@drawable/background"/>
+    <item android:id="@android:id/secondaryProgress" android:drawable="@drawable/secondary_progress"/>
+    <item android:id="@android:id/progress" android:drawable="@drawable/progress"/>
+</layer-list>
+```
+
+而对于其中的，`@drawable/progress`和`@drawable/secondary_progress`也不是普通的drawable，
+
+```xml
+<!--@drawable/progress 定义-->
+<clip xmlns:android="http://schemas.android.com/apk/res/android"
+      android:clipOrientation="horizontal"
+      android:drawable="@drawable/progress_drawable"
+      android:gravity="left" >
+</clip>
+```
+
+也就是说，通过XML要定义进度条的`ProgressDrawable`，我们需要定义多个XML文件的，还是比较复杂的。那么JavaCode实现呢？
+
+其实，理解了XML实现的方式，下面的JavaCode就很好理解了。
+
+```java
+LayerDrawable layerDrawable = (LayerDrawable) getProgressDrawable();
+
+//背景
+layerDrawable.setDrawableByLayerId(android.R.id.background, backgroundDrawable);
+
+//进度条
+ClipDrawable clipProgressDrawable = new ClipDrawable(progressDrawable, Gravity.LEFT, ClipDrawable.HORIZONTAL);
+layerDrawable.setDrawableByLayerId(android.R.id.progress, clipProgressDrawable);
+
+//缓冲进度条
+ClipDrawable clipSecondaryProgressDrawable = new ClipDrawable(secondaryProgressDrawable, Gravity.LEFT, ClipDrawable.HORIZONTAL);
+layerDrawable.setDrawableByLayerId(android.R.id.secondaryProgress, clipSecondaryProgressDrawable);
+```
+
+
+
 二，AndRatingBar原理
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+https://mp.weixin.qq.com/s?__biz=MzI1NjEwMTM4OA==&mid=2651232105&idx=1&sn=fcc4fa956f329f839f2a04793e7dd3b9&mpshare=1&scene=21&srcid=0719Nyt7J8hsr4iYwOjVPXQE#wechat_redirect

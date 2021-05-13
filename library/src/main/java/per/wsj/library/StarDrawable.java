@@ -24,19 +24,35 @@ public class StarDrawable extends LayerDrawable {
         });
 
         setId(0, android.R.id.background);
+        // progress & secondaryProgress must use ClipDrawable
         setId(1, android.R.id.secondaryProgress);
         setId(2, android.R.id.progress);
     }
 
+    /**
+     * create background drawable
+     * @param tileRes
+     * @param tintAttrRes
+     * @param context
+     * @param mKeepOriginColor
+     * @return
+     */
     private static Drawable createLayerDrawableWithTintAttrRes(int tileRes, int tintAttrRes,
                                                                Context context, boolean mKeepOriginColor) {
         int tintColor = -1;
-        if(!mKeepOriginColor){
+        if (!mKeepOriginColor) {
             tintColor = getColorFromAttrRes(tintAttrRes, context);
         }
         return createLayerDrawableWithTintColor(tileRes, tintColor, context);
     }
 
+    /**
+     * create secondaryProgress drawable
+     * @param tileResId
+     * @param tintColor
+     * @param context
+     * @return
+     */
     @SuppressLint("RtlHardcoded")
     private static Drawable createClippedLayerDrawableWithTintColor(int tileResId, int tintColor,
                                                                     Context context) {
@@ -49,7 +65,7 @@ public class StarDrawable extends LayerDrawable {
         TileDrawable drawable = new TileDrawable(AppCompatResources.getDrawable(context,
                 tileRes));
         drawable.mutate();
-        if(tintColor!=-1){
+        if (tintColor != -1) {
             drawable.setTint(tintColor);
         }
         return drawable;
@@ -86,7 +102,7 @@ public class StarDrawable extends LayerDrawable {
                 // fix bug:sdk<23 class ClipDrawable has no getDrawable() #8
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     return (TileDrawable) clipDrawable.getDrawable();
-                }else {
+                } else {
                     try {
                         String fieldState = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1 ? "mState" : "mClipState";
                         Field mStateField = clipDrawable.getClass().getDeclaredField(fieldState);
@@ -107,7 +123,7 @@ public class StarDrawable extends LayerDrawable {
     }
 
     private static int getColorFromAttrRes(int attrRes, Context context) {
-        TypedArray a = context.obtainStyledAttributes(new int[] { attrRes });
+        TypedArray a = context.obtainStyledAttributes(new int[]{attrRes});
         try {
             return a.getColor(0, 0);
         } finally {
