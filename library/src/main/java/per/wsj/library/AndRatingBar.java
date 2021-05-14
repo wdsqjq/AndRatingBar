@@ -4,9 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
+import android.graphics.drawable.LevelListDrawable;
 import android.util.AttributeSet;
 import android.widget.RatingBar;
 
@@ -90,8 +89,6 @@ public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChan
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-//        TintTypedArray typedArray = TintTypedArray.obtainStyledAttributes(context, attrs,
-//                R.styleable.AndRatingBar, defStyleAttr, 0);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.AndRatingBar, defStyleAttr, 0);
         right2Left = typedArray.getBoolean(R.styleable.AndRatingBar_right2Left, false);
 
@@ -138,10 +135,6 @@ public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChan
 
         RattingAttr starAttr = new RattingAttr(context, getNumStars(), mBgDrawable, mStarDrawable, mBgColor, mSubStarColor, mStarColor, mKeepOriginColor);
         mDrawable = new StarDrawable(starAttr);
-
-//        mDrawable = new StarDrawable(context, mStarDrawable, mBgDrawable, mKeepOriginColor);
-//        mDrawable.setStarCount(getNumStars());
-//        mDrawable.setTints(mBgColor, mSubStarColor, mStarColor);
         setProgressDrawable(mDrawable);
     }
 
@@ -169,87 +162,6 @@ public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChan
         int width = Math.round(height * mDrawable.getTileRatio() * getNumStars() * scaleFactor) + (int) ((getNumStars() - 1) * starSpacing);
         setMeasuredDimension(resolveSizeAndState(width, widthMeasureSpec, 0), height);
     }
-
-    @Override
-    public void setProgressDrawable(Drawable d) {
-        super.setProgressDrawable(d);
-        // 设置颜色
-//        applyProgressTints();
-    }
-
-    private void applyProgressTints() {
-        if (getProgressDrawable() == null) {
-            return;
-        }
-        applyPrimaryProgressTint();
-        applyProgressBackgroundTint();
-        applySecondaryProgressTint();
-    }
-
-    private void applyPrimaryProgressTint() {
-        if (mStarColor != null) {
-            Drawable target = getTintTargetFromProgressDrawable(android.R.id.progress, true);
-            if (target != null) {
-                applyTintForDrawable(target, mStarColor);
-            }
-        }
-    }
-
-    private void applySecondaryProgressTint() {
-        if (mSubStarColor != null) {
-            Drawable target = getTintTargetFromProgressDrawable(android.R.id.secondaryProgress,
-                    false);
-            if (target != null) {
-                applyTintForDrawable(target, mSubStarColor);
-            }
-        }
-    }
-
-    private void applyProgressBackgroundTint() {
-        if (mBgColor != null) {
-            Drawable target = getTintTargetFromProgressDrawable(android.R.id.background, false);
-            if (target != null) {
-                applyTintForDrawable(target, mBgColor);
-            }
-        }
-    }
-
-    private Drawable getTintTargetFromProgressDrawable(int layerId, boolean shouldFallback) {
-        Drawable progressDrawable = getProgressDrawable();
-        if (progressDrawable == null) {
-            return null;
-        }
-        progressDrawable.mutate();
-        Drawable layerDrawable = null;
-        if (progressDrawable instanceof LayerDrawable) {
-            layerDrawable = ((LayerDrawable) progressDrawable).findDrawableByLayerId(layerId);
-        }
-        if (layerDrawable == null && shouldFallback) {
-            layerDrawable = progressDrawable;
-        }
-        return layerDrawable;
-    }
-
-    // Progress drawables in this library has already rewritten tint related methods for
-    // compatibility.
-    @SuppressLint("NewApi")
-    private void applyTintForDrawable(Drawable drawable, ColorStateList tintList) {
-        if (tintList != null) {
-            if (drawable instanceof BaseDrawable) {
-                drawable.setTintList(tintList);
-            } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    drawable.setTintList(tintList);
-                }
-            }
-            // The drawable (or one of its children) may not have been
-            // stateful before applying the tint, so let's try again.
-            if (drawable.isStateful()) {
-                drawable.setState(getDrawableState());
-            }
-        }
-    }
-
 
     /**
      * A callback that notifies clients when the rating has been changed. This

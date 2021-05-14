@@ -1,3 +1,5 @@
+Android原生RatingBar为何这么难用？终极替代方案
+
 ### 一，原生RatingBar原理
 
 先看一下`RatingBar`的继承关系
@@ -27,7 +29,7 @@ protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpe
     }
 }
 ```
-**1.1  宽度计算**
+**1.1  宽度测量**
 
 宽度是通过`mSampleWidth`乘以`star`数量得来，那么`mSampleWidth`又是怎么来的呢？
 
@@ -84,7 +86,7 @@ private Drawable tileify(Drawable drawable, boolean clip) {
 }
 ```
 
-
+`BitmapDrawable`中`getIntrinsicWidt()`返回的就是mBitmap根据像素密度缩放后的bitmap的宽度：
 
 ```java
 // BitmapDrawable.java
@@ -108,7 +110,7 @@ private void computeBitmapSize() {
 
 
 
-**1.2  高度计算**
+**1.2  高度测量**
 
 `RatingBar`没有自己计算高度直接调用`getMeasuredHeight()` ，因此高度的计算是在父类中完成。
 
@@ -119,17 +121,14 @@ private void computeBitmapSize() {
 protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     // 注意此处并没有调用super.onMeasure();
 	Drawable d = getCurrentDrawable();
-
-	int thumbHeight = mThumb == null ? 0 : mThumb.getIntrinsicHeight();
-	int dw = 0;
+	...
 	int dh = 0;
 	if (d != null) {
-		dw = Math.max(mMinWidth, Math.min(mMaxWidth, d.getIntrinsicWidth()));
+        ...
         // getIntrinsicHeight()获取到的是drawable的原始高度
 		dh = Math.max(mMinHeight, Math.min(mMaxHeight, d.getIntrinsicHeight()));
-		dh = Math.max(thumbHeight, dh);
 	}
-	dw += mPaddingLeft + mPaddingRight;
+	...
 	dh += mPaddingTop + mPaddingBottom;
 
 	setMeasuredDimension(resolveSizeAndState(dw, widthMeasureSpec, 0),
@@ -141,7 +140,7 @@ protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpe
 
 **1.3  小结**
 
-`RatingBar`的宽度只跟图片的大小相关，高度和图片大小以及`minHeight`，`maxHeight`相关，不能根据设置的宽高自适应。那么这些图片的宽高是多少呢？
+`RatingBar`的宽度只跟图标的大小相关，高度和图标大小以及`minHeight`，`maxHeight`相关，不能根据设置的宽高自适应。那么这些图片的宽高是多少呢？
 
 RatingBar提供了三种样式，可以从整个app的`theme`：`Theme.MaterialComponents.Light.DarkActionBar`开始寻找
 
@@ -233,6 +232,27 @@ layerDrawable.setDrawableByLayerId(android.R.id.secondaryProgress, clipSecondary
 
 
 二，AndRatingBar原理
+
+1，测量
+
+```java
+@Override
+protected synchronized void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+    super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+    int height = getMeasuredHeight();
+    int width = Math.round(height * mDrawable.getTileRatio() * getNumStars() * scaleFactor) + (int) ((getNumStars() - 1) * starSpacing);
+    setMeasuredDimension(resolveSizeAndState(width, widthMeasureSpec, 0), height);
+}
+```
+
+
+
+2，构造LayerDrawable
+
+要构造一个包含`progress`,`secondaryProgress`，`background`三个图层的drawable，其中前两个是`ClipDrawable`
+
+
 
 
 

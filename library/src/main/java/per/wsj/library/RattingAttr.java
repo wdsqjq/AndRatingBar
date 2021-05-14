@@ -45,6 +45,7 @@ public class RattingAttr {
 
     public Drawable[] getLayerList() {
         return new Drawable[]{createLayerDrawableWithTintAttrRes(bgDrawable, R.attr.colorControlHighlight, keepOriginColor),
+                // progress & secondaryProgress must be ClipDrawable
                 createClippedLayerDrawableWithTintColor(starDrawable, Color.TRANSPARENT),
                 createClippedLayerDrawableWithTintAttrRes(starDrawable, R.attr.colorControlActivated, keepOriginColor)};
     }

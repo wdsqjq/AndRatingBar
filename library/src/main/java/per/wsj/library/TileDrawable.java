@@ -45,7 +45,9 @@ public class TileDrawable extends BaseDrawable {
         }
 
         int tileHeight = mDrawable.getIntrinsicHeight();
+        // 计算view高度和图标高度比例
         float scale = (float) height / tileHeight;
+        // 将画布缩放成图标高度的坐标系统
         canvas.scale(scale, scale);
 
         float scaledWidth = width / scale;
@@ -56,13 +58,15 @@ public class TileDrawable extends BaseDrawable {
                 mDrawable.draw(canvas);
             }
         } else {
+            // 整个宽度均分成几份
             float tileWidth = scaledWidth / mTileCount;
             for (int i = 0; i < mTileCount; ++i) {
                 int drawableWidth = mDrawable.getIntrinsicWidth();
+                // 找到每一份的中间位置
                 float tileCenter = tileWidth * (i + 0.5f);
-                float drawableWidthHalf = (float) drawableWidth / 2;
-                mDrawable.setBounds(Math.round(tileCenter - drawableWidthHalf), 0,
-                        Math.round(tileCenter + drawableWidthHalf), tileHeight);
+                float halfDrawableWidth = (float) drawableWidth / 2;
+                mDrawable.setBounds(Math.round(tileCenter - halfDrawableWidth), 0,
+                        Math.round(tileCenter + halfDrawableWidth), tileHeight);
                 mDrawable.draw(canvas);
             }
         }

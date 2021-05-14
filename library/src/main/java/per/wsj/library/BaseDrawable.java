@@ -129,6 +129,7 @@ abstract class BaseDrawable extends Drawable {
         }
 
         int saveCount = canvas.save();
+        // 默认就是在左上角
         canvas.translate(bounds.left, bounds.top);
         onDraw(canvas, bounds.width(), bounds.height());
         canvas.restoreToCount(saveCount);
