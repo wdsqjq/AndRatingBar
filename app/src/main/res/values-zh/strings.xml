@@ -6,7 +6,7 @@
     <string name="title_style">样式</string>
     <string name="title_in_list">列表</string>
     <string name="customize_count">自定义数量</string>
-    <string name="customize_rating_image">自定义图标</string>
+    <string name="customize_rating_image">自定义图标(is indicator)</string>
     <string name="customize_rating_color">自定义颜色</string>
     <string name="customize_secondary_color">自定义次要颜色</string>
     <string name="customize_background_color">自定义背景颜色</string>

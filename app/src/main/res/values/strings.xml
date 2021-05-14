@@ -6,7 +6,7 @@
     <string name="title_style">Style</string>
     <string name="title_in_list">List</string>
     <string name="customize_count">customize count</string>
-    <string name="customize_rating_image">customize rating image</string>
+    <string name="customize_rating_image">customize rating image (is indicator)</string>
     <string name="customize_rating_color">customize rating color</string>
     <string name="customize_secondary_color">customize secondary color</string>
     <string name="customize_background_color">customize background color</string>

@@ -4,13 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
-import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.View;
 import android.widget.RatingBar;
 
 /**
@@ -139,12 +136,20 @@ public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChan
 
         typedArray.recycle();
 
-        mDrawable = new StarDrawable(context, mStarDrawable, mBgDrawable, mKeepOriginColor);
-        mDrawable.setStarCount(getNumStars());
-        setProgressDrawable(mDrawable);
+        RattingAttr starAttr = new RattingAttr(context, getNumStars(), mBgDrawable, mStarDrawable, mBgColor, mSubStarColor, mStarColor, mKeepOriginColor);
+        mDrawable = new StarDrawable(starAttr);
 
+//        mDrawable = new StarDrawable(context, mStarDrawable, mBgDrawable, mKeepOriginColor);
+//        mDrawable.setStarCount(getNumStars());
+//        mDrawable.setTints(mBgColor, mSubStarColor, mStarColor);
+        setProgressDrawable(mDrawable);
+    }
+
+    @Override
+    public void setRating(float rating) {
+        super.setRating(rating);
         if (right2Left) {
-            setRating(getNumStars() - getRating());
+            super.setRating(getNumStars() - getRating());
         }
     }
 
@@ -168,7 +173,8 @@ public class AndRatingBar extends RatingBar implements RatingBar.OnRatingBarChan
     @Override
     public void setProgressDrawable(Drawable d) {
         super.setProgressDrawable(d);
-        applyProgressTints();
+        // 设置颜色
+//        applyProgressTints();
     }
 
     private void applyProgressTints() {

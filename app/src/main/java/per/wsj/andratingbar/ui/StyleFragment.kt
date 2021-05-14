@@ -23,5 +23,7 @@ class StyleFragment : Fragment() {
         ratingBar3.setOnRatingChangeListener { ratingBar, rating, fromUser ->
             tvRate.text = "当前rate:$rating -- fromUser: $fromUser"
         }
+
+        ratingBar3.rating = 3.5f
     }
 }
