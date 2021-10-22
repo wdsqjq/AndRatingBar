@@ -37,7 +37,7 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.wsj1024:AndRatingBar:1.0.6'
+	implementation 'com.github.wdsqjq:AndRatingBar:1.0.6'
 }
 ```
 
