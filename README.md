@@ -1,6 +1,7 @@
 # AndRatingBar
 
-[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) [![](https://jitpack.io/v/wsj1024/AndRatingBar.svg)](https://jitpack.io/#wsj1024/AndRatingBar)
+[![API](https://img.shields.io/badge/API-21%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=21) 
+[![](https://jitpack.io/v/wdsqjq/AndRatingBar.svg)](https://jitpack.io/#wdsqjq/AndRatingBar)
 
 A RatingBar library for android, you can customize size, spacing, color and image easily, and support right to left.\
 安卓RatingBar终极方案，继承自原生RatingBar，具有原生的滑动选择等特性，并且可以自定义大小，间距，颜色，图标，支持从右到左
